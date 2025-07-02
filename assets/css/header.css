@@ -1,0 +1,443 @@
+.mdc-top-app-bar {
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: fixed;
+    border-bottom: 1px solid #d9d9d9;
+    background-color: #f5f5f5;
+    padding: 0 5.4px;
+    width: 100%;
+    z-index: 10;
+    top: 0px !important;
+    transition: none !important;
+
+    .mdc-top-app-bar__action-items { 
+        display: flex;
+        align-items: center;
+        gap: 7.2px;
+        
+        .mdc-top-app-bar__action-item {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 8px;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            max-width: 78.55px;
+
+            .mdc-top-app-bar__icon {
+                width: 21px;
+                height: 21px;
+            }
+            .mdc-button__label {
+                  text-transform: capitalize;
+                    font-size: 12.6px;
+                    line-height: 12.6px;
+                    font-style: normal;
+                    font-weight: 600;
+                    color: #757575;
+                    word-break: break-word;
+                    margin: 0;
+                p {
+                    text-transform: capitalize;
+                    font-size: 12.6px;
+                    line-height: 12.6px;
+                    font-style: normal;
+                    font-weight: 600;
+                    color: #757575;
+                    word-break: break-word;
+                    margin: 0;
+                }
+            }
+   
+            /* Add styles for selected state */
+            &.active {
+                .mdc-top-app-bar__icon {
+                    filter: brightness(0) saturate(100%);
+                }
+                .mdc-button__label,
+                .mdc-button__label p {
+                    color: #1E1E1E;
+                }
+            }
+        }
+        .sign-up-class {
+            position: relative;
+            top: 10.8px;
+            width: 84.8875px;
+            max-width: 84px !important;
+            height: 77.375px;
+            padding: 8.41px 6.82px 15.96px 8.18px;
+            border-radius: 6px;
+            background: #2c2c2c;
+            }
+
+        .sign-up-class::after {
+            content: "";
+            position: absolute;
+            top: 94%;
+            background: url(../images/arrow-down.svg) no-repeat;
+            background-size: cover;
+            width: 84px;
+            height: 60px;
+            left: 0;
+        }
+
+        .sign-up-class .sign-up-label p {
+            text-decoration: none;
+            color: #fff;
+            font-size: 12.6px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 17.64px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        @media (max-width: 375px) {
+            .sign-up-class .sign-up-label p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+                display: block; 
+            }
+        }
+
+
+        .mdc-button:not(:disabled):hover {
+            background-color: transparent !important;
+        }
+
+        .mdc-button.sign-up-class:not(:disabled):hover {
+            background-color: #2c2c2c !important;
+        }
+    }
+
+    /* Logo sizing control */
+    .custom-logo-link {
+        display: flex;
+        align-items: center;
+        height: 58.5px;
+        width: 58.5px;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .custom-logo {
+        max-height: 48px; /* Adjust as needed */
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* Fallback for SVG logos */
+    .custom-logo[src$=".svg"] {
+        width: 100%;
+        height: 100%;
+        max-width: 180px;
+    }
+    .mdc-top-app-bar__row {
+        max-width: none !important;
+    }
+
+    /* Hide drawer by default */
+    .mdc-drawer--modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 1000;
+    }
+    
+    .mdc-drawer-scrim {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.32);
+        z-index: 999;
+    }
+    
+    /* Show/hide based on screen size */
+    .mobile-menu-items {
+        display: none;
+    }
+    /* Language section */
+    .language-switcher-container {
+        position: relative;
+    }
+    .cdk-overlay-pane {
+        position: absolute;
+        transform-origin: top right;
+        /* Initial hidden state */
+        opacity: 0;
+        transform: scale(0.8);
+        top: 65px;
+        display: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .cdk-overlay-pane.visible {
+        opacity: 1;
+         transform: scale(1);
+        display: block;
+    }
+
+    .mat-mdc-menu-panel {
+        min-width: 112px;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        padding: 8px 0;
+        overflow: hidden;
+    }
+
+    .mat-mdc-menu-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mat-mdc-menu-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 16px;
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .mat-mdc-menu-item:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .mat-mdc-menu-item-text {
+        flex: 1;
+    }
+
+    .mat-ripple {
+        display: none; /* optional visual ripple effect */
+    }
+    @media (max-width: 768px) {
+
+        .desktop-menu-items {
+            display: none !important;
+        }
+        .custom-logo-link {
+            width: 36px;
+            height: 36px;
+        }
+        .mobile-menu-items{
+            display: flex;
+            gap: 6.4px;
+            align-items: center;
+
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                
+                .user-name {
+                    color: #1e1e1e;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                
+                .logout-btn {
+                    padding: 8px 16px;
+                    border: 1px solid #d9d9d9;
+                    background: #f5f5f5;
+                    border-radius: 8px;
+                    color: #1e1e1e;
+                    font-size: 14px;
+                    cursor: pointer;
+                    
+                    &:hover {
+                        background: #e5e5e5;
+                    }
+                }
+            }
+
+            .login-button {
+                border: 1px solid #d9d9d9;
+                background: #f5f5f5;
+                border-radius: 8px;
+                min-width: 35.2px;
+                padding: 12px;
+                img {
+                    width: 16px;
+                    height: 16px;
+                }
+                span {
+                    display: none;
+                }
+            }
+            .sign-up-button {
+                border: 1px solid #2c2c2c;
+                background: #1e1e1e;
+                color: #f5f5f5;
+                padding: 9.6px;
+                border-radius: 8px !important;
+
+                span {
+                    p {
+                        font-weight: 400;
+                        font-size: 12.8px;
+                        margin: 0;
+                        text-transform: none;
+                    }
+                }
+        
+            }
+        }
+        .mdc-icon-button {
+            display: flex;
+            height: auto;
+            position: relative;
+            gap: 8px;
+            padding: 9.6px;
+            border-radius: 8px;
+            border: 1px solid #D9D9D9;
+            width: fit-content;
+            align-items: center;
+            img {
+                width: 16px;
+                height: 16px;
+            }
+            span {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 16px;
+                color:#1E1E1E;
+            }
+        }
+    }
+
+
+.mdc-menu-surface {
+    top: 2.3rem !important;
+    right: 1.2rem;
+    left: auto !important;
+    z-index: 10;
+    border-radius: 4px !important;
+    .mdc-list {
+        padding: 8px !important;
+        max-width: 280px;
+        .mdc-list-item {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 12px 16px !important; 
+            a {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                overflow: visible;
+                flex-direction: row;
+                color: #1e1e1e;
+                text-overflow: ellipsis;
+                font-size: 1.6rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%;
+                transition: all .3s ease-in-out;
+                text-decoration: none;
+                img {
+                    width: 21px;
+                    height: 21px;
+                    margin: 0;
+                }
+                p {
+                    color: #1E1E1E;
+                    font-size: 12.8px;
+                    font-weight: 400;
+                    line-height: 22.4px;
+                    text-decoration: none;
+                    text-overflow: ellipsis;
+                    margin: 0;
+                }
+            }
+            .field_link_description {
+                font-size: 11.2px;
+                font-weight: 400;
+                color: #757575;
+                padding-left: 35px;
+                line-height: 15.68px;
+            }
+        }
+    }
+}
+
+
+/* Mobile Menu Animation Styles */
+#mobile-drawer {
+    transform-origin: top right;
+    /* Initial hidden state */
+    opacity: 0;
+    transform: scale(0.8);
+    display: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  
+  #mobile-drawer.open {
+    opacity: 1;
+    transform: scale(1);
+    display: block;
+  }
+  
+  /* Menu items styling */
+  #mobile-drawer .mdc-list-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  #mobile-drawer .mdc-list-item:hover {
+    background-color: rgba(0,0,0,0.04);
+  }
+  
+  /* Burger button animation */
+  #burger-menu-button {
+    transition: transform 0.3s ease;
+  }
+  
+  .mdc-icon-button:after, .mdc-icon-button:before, .mdc-switch:not(.mdc-switch--checked) .mdc-switch__track {
+    background-color: transparent !important;
+  }
+}
+.mdc-button--outlined:not(:disabled):active, .mdc-button--outlined:not(:disabled):focus, .mdc-button:not(:disabled):active, .mdc-button:not(:disabled):focus {
+    background-color: transparent !important;
+}
+
+/* Override any other button styles */
+.mdc-top-app-bar .mdc-top-app-bar__action-items .mdc-top-app-bar__action-item.active,
+.mdc-top-app-bar .mdc-top-app-bar__action-items .mdc-top-app-bar__action-item[aria-current="page"],
+.mdc-top-app-bar .mdc-top-app-bar__action-items .mdc-top-app-bar__action-item.current-menu-item {
+    background-color: transparent !important;
+    .mdc-top-app-bar__icon {
+        filter: brightness(0) saturate(100%) !important;
+    }
+    .mdc-button__label,
+    .mdc-button__label p {
+        color: #1E1E1E !important;
+    }
+}

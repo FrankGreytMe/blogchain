@@ -1,0 +1,204 @@
+.main-content-wrapper {
+  display: flex; 
+  flex-wrap: nowrap; 
+  gap: 48px; 
+  align-items: flex-start;
+.sidebar {
+    width: 80px;
+    max-width: 80px;
+    padding: 24px 12px;
+  }
+  
+  .sidebar .filter-item {
+    position: relative;
+  }
+  
+  .sidebar .filter-item .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 16px;
+    border: 2px solid #5A5A5A;
+    background: #FFFFFF;
+    padding: 16px 0px;
+    width: 360px;
+  }
+
+  .sidebar .filter-item .submenu > a {
+      padding: 8px 16px;
+      display: flex;
+      gap: 16px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #1D1B20;
+      line-height: 24px;
+      text-decoration: none;
+  }
+
+  .sidebar .filter-item .submenu > a:hover {
+      background-color: #EDEDED;
+  }
+
+  .sidebar .filter-item:hover .submenu {
+    display: flex;
+    position: absolute;
+    left: 75px;
+    top: -8px;
+    z-index: 10;
+  }
+  
+  .sidebar .filter-item:hover .filter-link {
+    background-color: #5A5A5A;
+    border-radius: 16px 0px 0px 16px;
+    padding: 16px 0px;
+    width: 100%;
+    display: block;
+  }
+  
+  .sidebar .filter-item:hover .filter-link .stroke-style path {
+    stroke: #ffffff;
+  }
+  
+  .sidebar .filter-item:hover .filter-link .fill-style path {
+    fill: white;
+  }
+  
+  .sidebar .filter-item:hover .filter-link span {
+    color: white;
+  }
+  
+  .sidebar .filter-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 80px;
+  }
+  
+  .sidebar .filter-section .first-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .sidebar .filter-section .first-section .search-item {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #747474;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+                0px 1px 3px 0px rgba(0, 0, 0, 0.30);
+  }
+  
+  .sidebar .filter-section .first-section .filter-item {
+    color: #1B1B1B;
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .sidebar .filter-section .filter-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .sidebar .filter-section .filter-list .filter-item {
+    position: relative;
+  }
+  
+  .sidebar .filter-section .filter-list .filter-item .filter-link {
+    color: #757575;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
+  .page-title {
+    margin-top: 0;
+  }
+  .filter-title-mobile {
+    display: none;
+  }
+}
+
+  @media (max-width: 768px) {
+    .main-content-wrapper {
+      display: flex; 
+      flex-wrap: nowrap; 
+      flex-direction: row;
+      gap: 0px; 
+      align-items: flex-start;
+
+        .sidebar  { 
+          width: 45px;
+          max-width: 45px;
+          flex-shrink: 0;
+          padding: 0;
+        }
+        #primary {
+          min-width: 0;    /* Prevent overflow */
+          flex-grow: 1;       /* Make sure it takes remaining space */
+          min-width: 0;
+        }
+        .sidebar .filter-section .filter-list {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 36px;
+        }
+        .sidebar .filter-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 24px;
+          width: 45px;
+        }
+        .filter-item .filter-title {
+          display: none;
+        }
+        .sidebar .filter-section .first-section {
+          display: none;
+        }
+        .sidebar .filter-item .submenu {
+          padding: 0;
+          overflow: hidden;
+        }
+        .sidebar .filter-item:hover .submenu {
+          display: flex;
+          position: absolute;
+          left: 40px;
+          top: -8px;
+          z-index: 10;
+        }
+        .sidebar .filter-item .submenu  {
+            width: max-content;
+        }
+      .sidebar .filter-item:hover .filter-link {
+        background-color: #5A5A5A;
+        border-radius: 100px;
+        padding: 16px 0;
+        width: 100%;
+        display: block;
+      }
+      .filter-title-mobile {
+        display: flex;
+        background: #474747;
+        color: #fff;
+        padding: 6px 24px;
+      }
+    }
+}

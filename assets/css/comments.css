@@ -1,0 +1,87 @@
+.comments-area {
+
+    .comment-reply-title {
+        color: #000;
+        font-size: 34px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 40.12px; /* 118% */
+        letter-spacing: 0.25px;
+    }
+    .comment-notes {
+        margin-top: 18px;
+        margin-bottom: 24px;
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; /* 150% */
+        letter-spacing: 0.5px;
+    }
+    .mdc-text-field {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        height: auto;
+        .mdc-text-field__input{
+            border-radius: 8px;
+             padding: 24px 16px;
+
+        }
+    }
+    .form-submit {
+        .mdc-button {
+            display: flex;
+            padding: 10px 24px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex: 1 0 0;
+            align-self: stretch;
+            background-color: #2D2C2D;
+            color: #F3F3F3;
+            border-radius: 8px !important;
+            .mdc-button__ripple {
+                border-radius: 8px !important;
+            }
+            .mdc-button__label{
+                text-transform: capitalize;
+            }
+        }
+        .submit:hover{
+            text-decoration: none;
+        }
+    }
+    /* left border side */
+    .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading{
+        border-color: #D9D9D9;
+        border-radius: 8px 0 0 8px;
+    }
+    /* middle */
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch{
+        border-color: #D9D9D9;
+    }
+    /* right side */
+    .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__trailing {
+        border-color: #D9D9D9;
+        border-radius: 0px 8px 8px 0px;
+    }
+    /* Change checbox icon color */
+    .mdc-checkbox .mdc-checkbox__native-control:checked~.mdc-checkbox__background:before,
+    .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+    .mdc-checkbox.mdc-checkbox--selected {
+        background-color: #F3F3F3;
+        border-color: #000;
+    }
+    .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background  {
+        border-color: #000;
+    }
+    .mdc-checkbox .mdc-checkbox__native-control:enabled~.mdc-checkbox__background .mdc-checkbox__checkmark {
+        color: #000 !important;
+    }
+    /* checkbox corner */
+    .mdc-checkbox__background {
+        width: 21px;
+        height: 21px;
+    }
+}

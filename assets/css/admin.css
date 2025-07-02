@@ -1,0 +1,21 @@
+.wcr-token-container {
+	display: flex;
+	gap: 15px;
+	margin-top: 20px;
+}
+
+.wcr-token-container > div {
+	background-color: #fff;
+	flex: 1;
+	padding: 20px;
+}
+
+.wcr-token-container h2 {
+	margin: 0;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+}
+
+.wcr-token-container th {
+	width: 90px;
+}
