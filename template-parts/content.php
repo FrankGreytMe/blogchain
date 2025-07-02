@@ -53,7 +53,7 @@ $classes       = get_theme_mod( 'archive_outlined', false ) ? 'mdc-card--outline
                     ?>
                 "
                 >
-                    <?php echo get_avatar( get_the_author_meta( 'ID' ), 18 ); ?>
+                    <?php echo get_simple_local_avatar( get_the_author_meta( 'ID' ), 18 ); ?>
                     <?php the_author(); ?>
                 </a>
             <?php endif; ?>
@@ -67,8 +67,8 @@ $classes       = get_theme_mod( 'archive_outlined', false ) ? 'mdc-card--outline
                     more_vert
                 </button>
 
-                <div class="mdc-menu mdc-menu-surface" 
-                    id="dots-menu-<?php the_ID(); ?>" 
+                <div class="mdc-menu mdc-menu-surface"
+                    id="dots-menu-<?php the_ID(); ?>"
                     aria-hidden="true"
                     aria-modal="true"
                     aria-orientation="vertical">
@@ -80,7 +80,7 @@ $classes       = get_theme_mod( 'archive_outlined', false ) ? 'mdc-card--outline
                                     <span class="mdc-list-item__text"><?php echo pll__('Write a comment'); ?></span>
                                 </a>
                             </li>
-                            
+
                             <!-- Notification toggle -->
                             <li class="mdc-list-item" role="menuitem" tabindex="0">
                                 <span class="material-icons mdc-list-item__graphic" aria-hidden="true">notifications_none</span>

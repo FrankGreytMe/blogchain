@@ -46,7 +46,7 @@
         ?>
 	</header><!-- .entry-header -->
 	<?php material_design_theme_post_thumbnail(); ?>
- 
+
 	<div class="entry-content">
         <?php
             if ( 'post' === get_post_type() ) :
@@ -77,4 +77,10 @@
 		);
 		?>
 	</div><!-- .entry-content -->
+	<footer class="entry-meta">
+		<?php
+		var_dump( get_simple_local_avatar( get_the_author_meta( 'ID' ), 18 ) );
+		get_template_part( 'template-parts/single/questionnaire-capsule' );
+		?>
+	</footer><!-- .entry-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->
