@@ -1,0 +1,22 @@
+{
+    "key": "ui_options_page_6864d5392d4ae",
+    "title": "Questionnaire Capsule",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Questionnaire Capsule",
+    "menu_slug": "questionnaire-capsule",
+    "parent_slug": "wcr-settings",
+    "advanced_configuration": false,
+    "icon_url": "",
+    "menu_title": "",
+    "position": null,
+    "redirect": false,
+    "description": "",
+    "update_button": "Update",
+    "updated_message": "Options Updated",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": false,
+    "modified": 1751438649
+}

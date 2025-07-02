@@ -1,0 +1,19 @@
+/*
+  Theme Name:   Material Design Child
+  Theme URI:    http://example.com/material-design-child/
+  Description:  Child theme for Material Design Google
+  Author:       Your Name
+  Author URI:   http://example.com
+  Template:     material-design-google
+  Version:      1.0
+  Text Domain:  material-design-child
+*/
+body{
+  background-color: #F5F5F5 !important;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Import parent theme styles */
+@import url("../material-design-google/style.css");
