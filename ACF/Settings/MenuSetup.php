@@ -96,10 +96,17 @@ class MenuSetup {
                             'name' => 'roles',
                             'type' => 'checkbox',
                             'choices' => [
+								/*
                                 'administrator' => 'Administrator',
                                 'editor' => 'Editor',
                                 'author' => 'Author',
                                 'subscriber' => 'Subscriber',
+								*/
+								'all'        => 'All',
+								'logged_out' => 'Logged Out User Only',
+								'org_admin'  => 'Administrator',
+								'consult'    => 'Consult',
+								'blog'       => 'Blog',
                             ],
                             'wrapper' => [
                                 'width' => '50'

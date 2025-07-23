@@ -280,3 +280,5 @@ function wcr_admin_enqueue_scripts( $hook ) {
 add_action( 'admin_enqueue_scripts', 'wcr_admin_enqueue_scripts' );
 
 require_once get_stylesheet_directory() . '/inc/token/class-wcr-token.php';
+require_once get_stylesheet_directory() . '/inc/wcr-token-manager.php';
+require_once get_stylesheet_directory() . '/inc/token-manager-functions.php';
