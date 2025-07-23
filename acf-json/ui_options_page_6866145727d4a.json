@@ -1,15 +1,15 @@
 {
-    "key": "ui_options_page_6864d5392d4ae",
-    "title": "Questionnaire Capsule",
+    "key": "ui_options_page_6866145727d4a",
+    "title": "Blog & Post",
     "active": true,
     "menu_order": 0,
-    "page_title": "Questionnaire Capsule",
-    "menu_slug": "questionnaire-capsule",
+    "page_title": "Blog & Post",
+    "menu_slug": "blog-settings",
     "parent_slug": "wcr-settings",
     "advanced_configuration": 1,
     "icon_url": "",
     "menu_title": "",
-    "position": 1,
+    "position": 0,
     "redirect": false,
     "description": "",
     "update_button": "Update",
@@ -18,5 +18,5 @@
     "data_storage": "options",
     "post_id": "",
     "autoload": 0,
-    "modified": 1753076400
+    "modified": 1751520839
 }
