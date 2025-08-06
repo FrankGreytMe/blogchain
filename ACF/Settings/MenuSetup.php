@@ -112,6 +112,60 @@ class MenuSetup {
                                 'width' => '50'
                             ],
                         ],
+						/*
+						array(
+							'key'               => 'field_687f7758c1c9f',
+							'label'             => 'Menu Visibity (Login Status)',
+							'name'              => 'menu_visibity_login_status',
+							'aria-label'        => '',
+							'type'              => 'radio',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+                                'width' => '50'
+                            ),
+							'choices' => array(
+								'all'        => 'All',
+								'logged_out' => 'Logged Out',
+								'logged_in'  => 'Logged In',
+							),
+							'default_value' => 'all',
+							'return_format' => 'value',
+							'allow_null'    => 0,
+							'layout'        => 'horizontal',
+						),
+						array(
+							'key'               => 'field_687f784e6630e',
+							'label'             => 'User Roles',
+							'name'              => 'user_roles',
+							'aria-label'        => '',
+							'type'              => 'checkbox',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field' => 'field_687f7758c1c9f',
+										'operator' => '==',
+										'value' => 'logged_in',
+									),
+								),
+							),
+							'wrapper' => array(
+								'width' => '',
+							),
+							'choices' => array(
+								'org_admin' => 'Administrator',
+								'consult'   => 'Consult',
+								'blog'      => 'Blog',
+							),
+							'default_value' => array(),
+							'return_format' => 'value',
+							'allow_custom'  => 0,
+							'layout'        => 'horizontal',
+						),
+						*/
                         [
                             'key' => 'field_mobile_section',
                             'label' => 'Mobile Version',

@@ -8,6 +8,7 @@ class WCR_Token {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'admin_post_wcr_generate_token', array( $this, 'handle_token_generation' ) );
+		add_shortcode( 'wcr_login', array( $this, 'wcr_login_shortcode' ) );
 	}
 
 	/**
@@ -318,6 +319,34 @@ class WCR_Token {
 
 	public function get_token() {
 		return get_option( $this->option_name, '' );
+	}
+
+	public function wcr_login_shortcode( $atts ) {
+		$atts = shortcode_atts( array(
+			// 'foo' => 'no foo',
+			// 'baz' => 'default baz'
+		), $atts, 'wcr_login' );
+		?>
+		<div class="wcr-token-settings">
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" id="wcr-token-form">
+				<?php wp_nonce_field( 'wcr_generate_token_nonce', 'wcr_nonce' ); ?>
+				<input type="hidden" name="action" value="wcr_generate_token">
+				<table class="form-table">
+					<tr>
+						<th scope="row"><label for="wcr_email"><?php echo esc_html__( 'Email', 'material-design-child' ); ?></label></th>
+						<td><input type="email" autocomplete="off" id="wcr_email" name="wcr_email" class="regular-text" required ></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="wcr_password"><?php echo esc_html__( 'Password', 'material-design-child' ); ?></label></th>
+						<td><input type="password" autocomplete="off" id="wcr_password" name="wcr_password" class="regular-text" required></td>
+					</tr>
+				</table>
+				<p class="submit">
+					<input type="submit" name="submit" id="submit" class="button button-primary" value="Login">
+				</p>
+			</form>
+		</div>
+		<?php
 	}
 }
 $GLOBALS['wcr_token'] = new WCR_Token();
