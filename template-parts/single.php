@@ -80,4 +80,5 @@
 	<footer class="entry-meta">
 		<?php get_template_part( 'template-parts/single/questionnaire-capsule' ); ?>
 	</footer><!-- .entry-meta -->
+	<?php get_template_part( 'template-parts/single/post-sticky-menu' ); ?>
 </article><!-- #post-<?php the_ID(); ?> -->

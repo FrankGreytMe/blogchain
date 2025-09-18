@@ -11,3 +11,5 @@ email  : jignesh319@yopmail.com
 password: C!@Pq:$6hS'>cGa
 user_role: blog
 ```
+
+2. Integrated post sticky side menu and video popup.

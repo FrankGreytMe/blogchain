@@ -1,16 +1,16 @@
 {
-    "key": "ui_options_page_6866145727d4a",
-    "title": "Blog & Post",
+    "key": "ui_options_page_68c3deac8cae9",
+    "title": "WCR Settings",
     "active": true,
     "menu_order": 0,
-    "page_title": "Blog & Post",
-    "menu_slug": "blog-settings",
-    "parent_slug": "wcr-settings",
+    "page_title": "WCR Settings",
+    "menu_slug": "wcr-settings",
+    "parent_slug": "none",
     "advanced_configuration": 1,
     "icon_url": "",
     "menu_title": "",
-    "position": 0,
-    "redirect": false,
+    "position": "",
+    "redirect": 1,
     "description": "",
     "update_button": "Update",
     "updated_message": "Options Updated",
@@ -18,6 +18,5 @@
     "data_storage": "options",
     "post_id": "",
     "autoload": 0,
-    "_parent": 597,
-    "modified": 1757667049
+    "modified": 1757667135
 }

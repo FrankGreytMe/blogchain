@@ -14,7 +14,8 @@ class AdminMenu {
         }
 
         if (function_exists('acf_add_options_page')) {
-            acf_add_options_page([
+			/*
+			acf_add_options_page([
                 'page_title'    => 'WCR Settings',
                 'menu_title'    => 'WCR Settings',
                 'menu_slug'     => 'wcr-settings',
@@ -22,6 +23,7 @@ class AdminMenu {
                 'redirect'      => true,
                 'icon_url'      => 'dashicons-admin-generic',
             ]);
+			*/
 
             $sub_pages = [
                 'Site Settings',
@@ -38,7 +40,7 @@ class AdminMenu {
                     'update_button' => 'Update Settings',
                     'capability'    => 'publish_pages',
                 ]);
-                
+
             }
         }
 
@@ -49,16 +51,16 @@ class AdminMenu {
     {
         // Updated path without /app/
         $settings_dir = get_stylesheet_directory() . '/ACF/Settings/';
-    
+
         if (!is_dir($settings_dir)) {
             error_log('Settings directory not found: ' . $settings_dir);
             return;
         }
-    
+
         foreach (new FilesystemIterator($settings_dir) as $file) {
             if ($file->isFile() && $file->getExtension() === 'php') {
                 $className = 'WCR\\ACF\\Settings\\' . $file->getBasename('.php');
-                
+
                 if (class_exists($className)) {
                     $className::setACFFields();
                 } else {

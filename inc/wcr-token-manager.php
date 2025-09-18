@@ -23,7 +23,7 @@ class WCR_User_Manager {
 		add_action( 'after_setup_theme', array( $this, 'maybe_create_table' ) );
 		add_action( 'wcr_cleanup_expired_tokens', array( $this, 'clean_expired_tokens' ) );
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 99 );
 		add_shortcode( 'wcr_login_form', array( $this, 'login_form_shortcode' ) );
 
 		add_action( 'wp_ajax_wcr_login', array( $this, 'handle_login' ) );
@@ -131,7 +131,8 @@ class WCR_User_Manager {
 			)
 		);
 
-		wp_enqueue_style( 'wcr_front', get_stylesheet_directory_uri() . '/assets/css/wcr-front.css', array(), '1.0.0' );
+		wp_register_style( 'material_icons', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined', array(), '1.0.0' );
+		wp_enqueue_style( 'wcr_front', get_stylesheet_directory_uri() . '/assets/css/wcr-front.css', array( 'material_icons' ), '1.0.0' );
 	}
 
 	/**
