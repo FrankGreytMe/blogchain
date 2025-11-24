@@ -7,6 +7,7 @@ $styles = array(
 );
 $styles_str = implode( ';', $styles );
 $wcr_video_url = get_field( 'wcr_video_url', $current_post_id );
+$wcr_audio_url = get_field( 'wcr_audio_url', $current_post_id );
 ?>
 <div class="post-sticky-menu-wrap" style="<?php echo esc_attr( $styles_str ); ?>">
 	<div class="post-sticky-menu">
@@ -22,7 +23,10 @@ $wcr_video_url = get_field( 'wcr_video_url', $current_post_id );
 			<span class="material-symbols-outlined">video_library</span>
 			<span class="post-sticky-menu-item-tooltip" data-tooltip_title="<?php echo esc_attr( 'Play article videos', 'material-design-child' ); ?>"></span>
 		</button>
-		<button class="post-sticky-menu-item material-icons mdc-icon-button mdc-ripple-surface psmi-play-audio">
+		<button class="post-sticky-menu-item material-icons mdc-icon-button mdc-ripple-surface psmi-play-audio unselected" data-audio="<?php echo esc_attr( $wcr_audio_url ? $wcr_audio_url : '' ); ?>">
+			<?php /* ?>
+			<span class="material-symbols-outlined"></span>
+			<?php */ ?>
 			<span class="material-symbols-outlined">brand_awareness</span>
 			<span class="post-sticky-menu-item-tooltip" data-tooltip_title="<?php echo esc_attr( 'Listen to article', 'material-design-child' ); ?>"></span>
 		</button>

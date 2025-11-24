@@ -272,6 +272,90 @@
 				// video_iframe.attr('src', ''); // stop YouTube video
 			}
 		}
+		if ( $('.post-sticky-menu-item.psmi-play-audio').exists() && '' !== $('.post-sticky-menu-item.psmi-play-audio').data('audio') ) {
+			console.log( $('.post-sticky-menu-item.psmi-play-audio') );
+			console.log( $('.post-sticky-menu-item.psmi-play-audio').data('audio') );
+			soundManager.setup({
+				// url: '/path/to/swf/', // required fallback, can stay dummy
+				onready: function() {
+					var current_sound  = null;
+					var current_button = null;
+
+					function set_state( $audio_btn, state ) {
+						$audio_btn.removeClass('active playing paused unselected ended')
+							.addClass( state );
+						if ( 'playing' === state || 'paused' === state || 'ended' === state ) {
+							$audio_btn.addClass( 'active' );
+						}
+					}
+
+					$(document).on('click', function(e) {
+						// Check if the click target is not the specified element or a child of it
+						if ( ! $(e.target).closest('.post-sticky-menu-item.psmi-play-audio').length ) {
+
+							current_sound.stop();
+							set_state( current_button, 'unselected' );
+							current_sound = null;
+							current_button = null;
+
+							// If the element has the 'active' class, remove it.
+							$('.post-sticky-menu-item.psmi-play-audio.active').removeClass('active');
+						}
+					});
+
+					$('.post-sticky-menu-item.psmi-play-audio').on('click', function() {
+						const $audio_btn = $(this);
+						const audio_url  = $audio_btn.data('audio');
+
+						// If another button is active, stop it
+						if ( current_button && ! $audio_btn.is( current_button ) ) {
+							current_sound.stop();
+							set_state( current_button, 'unselected' );
+							current_sound = null;
+							current_button = null;
+						}
+
+						// If unselected, then create sound + play
+						if ( $audio_btn.hasClass('unselected') ) {
+							current_sound = soundManager.createSound({
+								id: 'sound-' + Date.now(),
+								url: audio_url,
+								autoLoad: true,
+								onfinish: function() {
+									// Audio finished, then set ended state.
+									set_state( $audio_btn, 'ended' );
+								}
+							});
+							current_sound.play();
+							current_button = $audio_btn;
+							set_state( $audio_btn, 'playing' );
+
+						// If playing, then pause.
+						} else if ( $audio_btn.hasClass('playing') ) {
+							if ( current_sound ) {
+								current_sound.pause();
+								set_state( $audio_btn, 'paused' );
+							}
+
+						// If paused, then resume.
+						} else if ( $audio_btn.hasClass('paused') ) {
+							if (current_sound) {
+								current_sound.resume();
+								set_state( $audio_btn, 'playing' );
+							}
+
+						// If ended, then restart from beginning.
+						} else if ( $audio_btn.hasClass('ended') ) {
+							if ( current_sound ) {
+								current_sound.stop();
+								current_sound.play();
+								set_state( $audio_btn, 'playing' );
+							}
+						}
+					});
+				}
+			});
+		}
 	}
 
 	function get_embed_src(original_src) {
