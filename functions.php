@@ -282,3 +282,11 @@ add_action( 'admin_enqueue_scripts', 'wcr_admin_enqueue_scripts' );
 require_once get_stylesheet_directory() . '/inc/token/class-wcr-token.php';
 require_once get_stylesheet_directory() . '/inc/wcr-token-manager.php';
 require_once get_stylesheet_directory() . '/inc/token-manager-functions.php';
+
+require_once get_stylesheet_directory() . '/inc/theme-functions.php';
+
+require_once get_stylesheet_directory() . '/inc/header/class-wcr-header.php';
+require_once get_stylesheet_directory() . '/inc/header/class-wcr-header-acf.php';
+require_once get_stylesheet_directory() . '/inc/header/class-wcr-header-menu-walker.php';
+require_once get_stylesheet_directory() . '/inc/header/class-wcr-mobile-menu-walker.php';
+require_once get_stylesheet_directory() . '/inc/header/class-wcr-header-test.php';

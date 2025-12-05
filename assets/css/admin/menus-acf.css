@@ -1,0 +1,17 @@
+.acf-menu-item-fields.acf-fields:has(.wcr-menu-icon) {
+	border: 1px solid #3582c4;
+	padding: 5px;
+	background: #ececec;
+}
+.acf-menu-item-fields.acf-fields:has(.wcr-menu-icon) .acf-field:first-child,
+.acf-menu-item-fields.acf-fields:has(.wcr-menu-icon) .acf-field:last-child{
+	margin-top: 0px;
+}
+.acf-menu-item-fields.acf-fields:has(.wcr-menu-icon) .acf-label label {
+	font-weight: bold;
+	font-style: normal;
+	font-size: 12px;
+}
+.acf-menu-item-fields.acf-fields:has(.wcr-menu-icon) ul.acf-radio-list.acf-hl li {
+  margin-right: 10px
+}

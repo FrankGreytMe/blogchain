@@ -17,3 +17,44 @@ html {
 
 /* Import parent theme styles */
 @import url("../material-design-google/style.css");
+
+
+.mat-mdc-menu-content li {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+.mat-mdc-menu-content li:hover {
+	background-color: rgba(0, 0, 0, 0.04);
+}
+.mat-mdc-menu-content li a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* Debub Code - Ignore */
+/*
+.mdc-top-app-bar {
+	position: relative !important;
+}
+
+pre {
+	color: #f00;
+	background-color: #fff;
+	padding: 7px 0;
+	margin: 0;
+}
+.mdc-top-app-bar__row {
+	display: block;
+}
+.top-app-bar .mdc-top-app-bar__section--align-end {
+	display: block;
+}
+*/

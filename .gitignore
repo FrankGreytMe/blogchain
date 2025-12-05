@@ -243,3 +243,4 @@ endpoints.http
 /screens/
 DUMP/
 .textdomain-standard.json
+/acf-json-dump
