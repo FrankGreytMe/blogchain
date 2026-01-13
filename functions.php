@@ -289,4 +289,4 @@ require_once get_stylesheet_directory() . '/inc/header/class-wcr-header.php';
 require_once get_stylesheet_directory() . '/inc/header/class-wcr-header-acf.php';
 require_once get_stylesheet_directory() . '/inc/header/class-wcr-header-menu-walker.php';
 require_once get_stylesheet_directory() . '/inc/header/class-wcr-mobile-menu-walker.php';
-require_once get_stylesheet_directory() . '/inc/header/class-wcr-header-test.php';
+// require_once get_stylesheet_directory() . '/inc/header/class-wcr-header-test.php';

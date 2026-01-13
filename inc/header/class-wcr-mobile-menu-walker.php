@@ -140,9 +140,9 @@ class WCR_Mobile_Menu_Walker extends Walker_Nav_Menu {
 					return true;
 				}
 
-				$wcr_user = wcr_get_current_wcr_user();
+				$wcr_user_roles = wcr_get_wcr_user_roles();
 
-				if ( ! isset( $wcr_user->role ) || empty( $wcr_user->role ) || ! in_array( $wcr_user->role, $allowed_roles ) ) {
+				if ( ! is_array( $wcr_user_roles ) || empty( $wcr_user_roles ) || empty( array_intersect($wcr_user_roles, $allowed_roles) ) ) {
 					return false;
 				}
 

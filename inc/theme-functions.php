@@ -1,24 +1,21 @@
 <?php
 function wcr_get_current_wcr_user() {
 	$wcr_user = apply_filters( 'wcr_get_current_wcr_user', false );
-	// var_dump($wcr_user);
 	return $wcr_user;
 }
 function wcr_is_wcr_user_logged_in() {
-	$is_user_logged_in = false;
-	$wcr_user = wcr_get_current_wcr_user();
-	if ( $wcr_user ) {
-		$is_user_logged_in = true;
-	}
+	$wcr_user_manager  = wcr_user_manager();
+
+	$is_user_logged_in = $wcr_user_manager->is_user_logged_in();
+
 	return $is_user_logged_in;
 }
 
-function wcr_get_wcr_userrole() {
-	$userrole = '';
-	$is_user_logged_in = wcr_is_wcr_user_logged_in();
-	// var_dump($is_user_logged_in);
-	if ( $is_user_logged_in ) {
-		$userrole = apply_filters( 'wcr_get_wcr_userrole', $userrole );
-	}
-	return $userrole;
+function wcr_get_wcr_user_roles() {
+	$wcr_user_manager = wcr_user_manager();
+
+	$user_roles = $wcr_user_manager->get_user_roles();
+	$user_roles = apply_filters( 'wcr_get_wcr_user_roles', $user_roles );
+
+	return $user_roles;
 }

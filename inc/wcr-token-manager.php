@@ -8,15 +8,18 @@
  */
 class WCR_User_Manager {
 
-	public $table_name        = 'wcr_tokens';
-	public $cookie_name       = 'wcr_token_key';
-	private $cookie_expiry    = 30 * DAY_IN_SECONDS; // 30 days
-	private $api_base         = 'https://xyz.com/api/';
-	private $bearer_token_url = 'https://getme.global/api/v1/auth/sign_in';
-	private $jwt_token_url    = 'https://getme.global/api/v1/wordpress_auth/jwt_token';
-	private $validate_token_x = 'https://wcr.is/api/v1/auth/validate_token';
-	private $validate_token   = 'https://getme.global/api/v1/auth/validate_token';
-	private $verify_jwt_token = 'https://getme.global/api/v1/wordpress_auth/verify_jwt_token';
+	public $table_name           = 'wcr_tokens';
+	public $cookie_name          = 'wcr_token_key';
+	private $cookie_expiry       = 30 * DAY_IN_SECONDS; // 30 days
+	// private $api_base         = 'https://xyz.com/api/';
+	// private $bearer_token_url = 'https://getme.global/api/v1/auth/sign_in';
+	// private $jwt_token_url    = 'https://getme.global/api/v1/wordpress_auth/jwt_token';
+	// private $validate_token   = 'https://getme.global/api/v1/auth/validate_token';
+	// private $verify_jwt_token = 'https://getme.global/api/v1/wordpress_auth/verify_jwt_token';
+	private $bearer_token_url    = 'https://wcr.is/api/v1/auth/sign_in';
+	private $jwt_token_url       = 'https://wcr.is/api/v1/wordpress_auth/jwt_token';
+	private $validate_token      = 'https://wcr.is/api/v1/auth/validate_token';
+	private $verify_jwt_token    = 'https://wcr.is/api/v1/wordpress_auth/verify_jwt_token';
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
@@ -85,10 +88,10 @@ class WCR_User_Manager {
 
 		$sql = "CREATE TABLE $table_name (
 			id int(11) NOT NULL AUTO_INCREMENT,
+			user_email varchar(100) NOT NULL,
+			user_data longtext NOT NULL,
 			token_key varchar(64) NOT NULL UNIQUE,
 			wcr_token text NOT NULL,
-			user_data longtext NOT NULL,
-			user_email varchar(100) NOT NULL,
 			created_at datetime DEFAULT CURRENT_TIMESTAMP,
 			expires_at datetime NOT NULL,
 			last_accessed datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -186,14 +189,28 @@ class WCR_User_Manager {
 	public function display_user_data() {
 		$is_user_logged_in = $this->is_user_logged_in();
 		if ( $is_user_logged_in ) {
-			$user_data = $this->get_user_data();
-			$user_role = $this->get_user_role();
-			$name = join( ' ', array_filter( array( $user_data->first_name, $user_data->last_name ) ) );
+			$user_role       = $this->get_user_role();
+			$user_roles      = $this->get_user_roles();
+			$user_data       = $this->get_user_data();
+			$name            = join( ' ', array_filter( array( $user_data->first_name, $user_data->last_name ) ) );
+			$debug_user_data = get_field( 'wcr_debug_user_data', 'option' );
 			?>
 			<div class="wcr-user-data">
 				<h3><?php echo 'Welcome, ' . esc_html( $name ); ?></h3>
 				<p><?php echo '<p>Email: ' . esc_html( $user_data->email ); ?></p>
-				<!--<p><?php echo '<p>User Role: ' . esc_html( $user_role ); ?></p>-->
+				<?php
+				if ( $debug_user_data ) {
+					?>
+					<p><?php echo '<p>User Roles: ' . esc_html( implode( ', ', $user_roles ) ); ?></p>
+					<?php
+					echo '<pre>$user_roles:';
+					print_r( $user_roles );
+					echo '</pre>';
+					echo '<pre>$user_data:';
+					print_r( $user_data );
+					echo '</pre>';
+				}
+				?>
 				<div class="wcr-logout-fields-wrapper">
 					<?php wp_nonce_field( 'wcr_nonce', 'nonce' ); ?>
 					<p>
@@ -687,8 +704,19 @@ class WCR_User_Manager {
 		return $permissions;
 	}
 
+	public function get_user_roles() {
+		$user_roles  = array();
+		$permissions = $this->get_permissions();
+
+		if ( is_array( $permissions ) && ! empty( $permissions ) ) {
+			$user_roles = $permissions;
+		}
+
+		return $user_roles;
+	}
+
 	public function get_user_role() {
-		$user_role   = 'blog';
+		$user_role   = '';
 		$permissions = $this->get_permissions();
 
 		if ( is_array( $permissions ) && ! empty( $permissions ) ) {
@@ -700,4 +728,8 @@ class WCR_User_Manager {
 	}
 }
 
-$GLOBALS['wcr_user_manager'] = new WCR_User_Manager();
+function wcr_user_manager() {
+	return new WCR_User_Manager();
+}
+
+$GLOBALS['wcr_user_manager'] = wcr_user_manager();
