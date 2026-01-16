@@ -20,6 +20,15 @@ function wcr_get_wcr_user_roles() {
 	return $user_roles;
 }
 
+function wcr_get_permission_wp() {
+	$wcr_user_manager = wcr_user_manager();
+
+	$permission_wp = $wcr_user_manager->get_permission_wp();
+	$permission_wp = apply_filters( 'wcr_get_permission_wp', $permission_wp );
+
+	return $permission_wp;
+}
+
 function safe_get_field( $field_name, $post_id = false, $default = '' ) {
     // Only call ACF after init hook has fired.
     if ( ! did_action( 'init' ) ) {

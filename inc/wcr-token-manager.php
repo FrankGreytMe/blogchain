@@ -24,7 +24,7 @@ class WCR_User_Manager {
 	private $validate_token      = 'https://wcr.is/api/v1/auth/validate_token';
 	*/
 	private $api_domain                = '';
-	private $bearer_token_endpoint     = 'api/v1/auth/sign_in';
+	private $sign_in_endpoint     = 'api/v1/auth/sign_in';
 	private $jwt_token_endpoint        = 'api/v1/wordpress_auth/jwt_token';
 	private $verify_jwt_token_endpoint = 'api/v1/wordpress_auth/verify_jwt_token';
 	private $validate_token            = 'api/v1/auth/validate_token';
@@ -200,6 +200,7 @@ class WCR_User_Manager {
 		if ( $is_user_logged_in ) {
 			$user_role       = $this->get_user_role();
 			$user_roles      = $this->get_user_roles();
+			$permission_wp   = $this->get_permission_wp();
 			$user_data       = $this->get_user_data();
 			$name            = join( ' ', array_filter( array( $user_data->first_name, $user_data->last_name ) ) );
 			$debug_user_data = safe_get_field( 'wcr_debug_user_data', 'option', 0 );
@@ -210,11 +211,13 @@ class WCR_User_Manager {
 				<p><?php echo '<p>Email: ' . esc_html( $user_data->email ); ?></p>
 				<?php
 				if ( $debug_user_data ) {
+					/*
 					?>
 					<p><?php echo '<p>User Roles: ' . esc_html( implode( ', ', $user_roles ) ); ?></p>
 					<?php
-					echo '<pre>$user_roles:';
-					print_r( $user_roles );
+					*/
+					echo '<pre>$permission_wp: ';
+					print_r( $permission_wp );
 					echo '</pre>';
 					echo '<pre>$user_data:';
 					print_r( $user_data );
@@ -303,12 +306,12 @@ class WCR_User_Manager {
 
 	public function get_bearer_token_data( $email, $password ) {
 
-		$bearer_token_url = add_query_arg(
+		$sign_in_url = add_query_arg(
 			array(
 				'email'    => $email,
 				'password' => $password,
 			),
-			trailingslashit( $this->api_domain ) . $this->bearer_token_endpoint
+			trailingslashit( $this->api_domain ) . $this->sign_in_endpoint
 		);
 
 		$request_args = array(
@@ -320,7 +323,7 @@ class WCR_User_Manager {
 			)
 		);
 
-		$response = wp_remote_post( $bearer_token_url, $request_args );
+		$response = wp_remote_post( $sign_in_url, $request_args );
 
 		if ( is_wp_error( $response ) ) {
 			return $response;
@@ -329,14 +332,14 @@ class WCR_User_Manager {
 		$response_code    = wp_remote_retrieve_response_code( $response );
 		$response_body    = wp_remote_retrieve_body( $response );
 		$response_headers = wp_remote_retrieve_headers( $response );
+		$body_data        = json_decode( $response_body, true ); // Try to parse error message from response body.
 
 		// Log response for debugging.
+		error_log( 'Bearer Token Process Begin ===' );
+		error_log( 'Bearer Token Sign In URL: ' . $sign_in_url );
 		error_log( 'Bearer Token Response Code: ' . $response_code );
-		error_log( 'Bearer Token Response Body: ' . $response_body );
 		error_log( 'Bearer Token Response Headers: ' . print_r( $response_headers, true ) );
-
-		// Try to parse error message from response body.
-		$body_data = json_decode( $response_body, true );
+		error_log( 'Bearer Token Response Body: ' . print_r( $body_data, true ) );
 
 		if ( 200 !== $response_code ) {
 			$error_message = 'Authentication failed';
@@ -390,18 +393,25 @@ class WCR_User_Manager {
 			return new WP_Error( 'token_request_error', 'JWT Token request error: ' . $response->get_error_message() );
 		}
 
-		$response_code = wp_remote_retrieve_response_code( $response );
-		$response_body = wp_remote_retrieve_body( $response );
+		$response_code    = wp_remote_retrieve_response_code( $response );
+		$response_headers = wp_remote_retrieve_headers( $response );
+		$response_body    = wp_remote_retrieve_body( $response );
 
 		// Log response for debugging.
+		// Log response for debugging.
+		error_log( 'JWT Token Process Begin ===' );
+		error_log( 'JWT Token URL: ' . $jwt_token_url );
 		error_log( 'JWT Token Response Code: ' . $response_code );
-		error_log( 'JWT Token Response Body: ' . $response_body );
+		error_log( 'JWT Token Response Headers: ' . print_r( $response_headers, true ) );
+
 
 		if ( 200 !== $response_code ) {
 			return new WP_Error( 'token_retrive_error', 'Failed to retrieve JWT token (HTTP ' . $response_code . ')' );
 		}
 
 		$data = json_decode( $response_body, true );
+
+		error_log( 'JWT Token Response Body: ' . print_r( $data, true ) );
 
 		if ( ! is_array( $data ) ) {
 			return new WP_Error( 'invalid_response_format', 'Invalid response format from JWT token endpoint.' );
@@ -619,7 +629,7 @@ class WCR_User_Manager {
 			),
 		);
 
-		$verify_jwt_token_url = trailingslashit( $this->api_domain ) . $verify_jwt_token_endpoint;
+		$verify_jwt_token_url = trailingslashit( $this->api_domain ) . $this->verify_jwt_token_endpoint;
 
 		$response = wp_remote_post( $verify_jwt_token_url, $request_args );
 
@@ -716,6 +726,17 @@ class WCR_User_Manager {
 		}
 
 		return $permissions;
+	}
+
+	public function get_permission_wp() {
+		$permission_wp = 'unsigned';
+		$user_data     = $this->get_user_data();
+
+		if ( isset( $user_data->permission_wp ) && is_string( $user_data->permission_wp ) ) {
+			$permission_wp = $user_data->permission_wp;
+		}
+
+		return $permission_wp;
 	}
 
 	public function get_user_roles() {
