@@ -19,3 +19,18 @@ function wcr_get_wcr_user_roles() {
 
 	return $user_roles;
 }
+
+function safe_get_field( $field_name, $post_id = false, $default = '' ) {
+    // Only call ACF after init hook has fired.
+    if ( ! did_action( 'init' ) ) {
+        return $default;
+    }
+
+    // Check if ACF function exists.
+    if ( ! function_exists( 'get_field' ) ) {
+        return $default;
+    }
+
+    $value = get_field( $field_name, $post_id );
+    return $value !== false && $value !== null ? $value : $default;
+}

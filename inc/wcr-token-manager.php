@@ -14,12 +14,20 @@ class WCR_User_Manager {
 	// private $api_base         = 'https://xyz.com/api/';
 	// private $bearer_token_url = 'https://getme.global/api/v1/auth/sign_in';
 	// private $jwt_token_url    = 'https://getme.global/api/v1/wordpress_auth/jwt_token';
-	// private $validate_token   = 'https://getme.global/api/v1/auth/validate_token';
 	// private $verify_jwt_token = 'https://getme.global/api/v1/wordpress_auth/verify_jwt_token';
+	// private $validate_token   = 'https://getme.global/api/v1/auth/validate_token';
+
+	/*
 	private $bearer_token_url    = 'https://wcr.is/api/v1/auth/sign_in';
 	private $jwt_token_url       = 'https://wcr.is/api/v1/wordpress_auth/jwt_token';
-	private $validate_token      = 'https://wcr.is/api/v1/auth/validate_token';
 	private $verify_jwt_token    = 'https://wcr.is/api/v1/wordpress_auth/verify_jwt_token';
+	private $validate_token      = 'https://wcr.is/api/v1/auth/validate_token';
+	*/
+	private $api_domain                = '';
+	private $bearer_token_endpoint     = 'api/v1/auth/sign_in';
+	private $jwt_token_endpoint        = 'api/v1/wordpress_auth/jwt_token';
+	private $verify_jwt_token_endpoint = 'api/v1/wordpress_auth/verify_jwt_token';
+	private $validate_token            = 'api/v1/auth/validate_token';
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
@@ -43,6 +51,7 @@ class WCR_User_Manager {
 	 * Initialize the plugin
 	 */
 	public function init() {
+		$this->api_domain = $this->get_api_domain();
 		// Check if user has token_key cookie and load user data.
 		if ( isset( $_COOKIE[ $this->cookie_name ] ) ) {
 			$this->load_user_data_from_cookie();
@@ -193,7 +202,8 @@ class WCR_User_Manager {
 			$user_roles      = $this->get_user_roles();
 			$user_data       = $this->get_user_data();
 			$name            = join( ' ', array_filter( array( $user_data->first_name, $user_data->last_name ) ) );
-			$debug_user_data = get_field( 'wcr_debug_user_data', 'option' );
+			$debug_user_data = safe_get_field( 'wcr_debug_user_data', 'option', 0 );
+			$debug_user_data = filter_var( $debug_user_data, FILTER_VALIDATE_BOOLEAN );
 			?>
 			<div class="wcr-user-data">
 				<h3><?php echo 'Welcome, ' . esc_html( $name ); ?></h3>
@@ -298,7 +308,7 @@ class WCR_User_Manager {
 				'email'    => $email,
 				'password' => $password,
 			),
-			$this->bearer_token_url
+			trailingslashit( $this->api_domain ) . $this->bearer_token_endpoint
 		);
 
 		$request_args = array(
@@ -371,7 +381,9 @@ class WCR_User_Manager {
 			),
 		);
 
-		$response = wp_remote_get( $this->jwt_token_url, $request_args );
+		$jwt_token_url = trailingslashit( $this->api_domain ) . $this->jwt_token_endpoint;
+
+		$response = wp_remote_get( $jwt_token_url, $request_args );
 
 		// Check for WP_Error.
 		if ( is_wp_error( $response ) ) {
@@ -607,7 +619,9 @@ class WCR_User_Manager {
 			),
 		);
 
-		$response = wp_remote_post( $this->verify_jwt_token, $request_args );
+		$verify_jwt_token_url = trailingslashit( $this->api_domain ) . $verify_jwt_token_endpoint;
+
+		$response = wp_remote_post( $verify_jwt_token_url, $request_args );
 
 		if ( is_wp_error( $response ) ) {
 			error_log( 'User Data API Error: ' . $response->get_error_message() );
@@ -725,6 +739,26 @@ class WCR_User_Manager {
 		}
 
 		return $user_role;
+	}
+
+	public function get_api_domain() {
+		$api_domain  = 'https://getme.global/';
+		$api_domains = array(
+			'dev'  => 'https://getme.global/',
+			'live' => 'https://wcr.is/',
+		);
+
+		$api_domain_opt = 'dev';
+		$api_domain_acf = safe_get_field( 'wcr_api_domain', 'option', 'dev' );
+
+		if ( $api_domain_acf && in_array( $api_domain_acf, array( 'live', 'dev' ), true ) ) {
+			$api_domain_opt = $api_domain_acf;
+		}
+
+		if ( isset( $api_domains[ $api_domain_opt ] ) ) {
+			$api_domain = $api_domains[ $api_domain_opt ];
+		}
+		return $api_domain;
 	}
 }
 

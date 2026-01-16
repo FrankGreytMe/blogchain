@@ -9,7 +9,8 @@ class SiteSettings {
             return;
         }
 
-        acf_add_local_field_group([
+        /*
+		acf_add_local_field_group([
             'key' => 'group_site_settings',
             'title' => 'Site Settings',
             'fields' => [
@@ -32,5 +33,6 @@ class SiteSettings {
                 ],
             ],
         ]);
+		*/
     }
 }

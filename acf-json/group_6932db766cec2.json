@@ -1,7 +1,94 @@
 {
     "key": "group_6932db766cec2",
-    "title": "Debugging",
+    "title": "Site Settings",
     "fields": [
+        {
+            "key": "field_6965fdd48af78",
+            "label": "General",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wp-typography": "none",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6965fdf98af79",
+            "label": "Enable Sidebar",
+            "name": "enable_sidebar",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wp-typography": "none",
+            "message": "",
+            "default_value": 0,
+            "translations": "sync",
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1,
+            "pll_default_value": 0
+        },
+        {
+            "key": "field_6965fe2b8af7a",
+            "label": "API",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wp-typography": "none",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6965fe478af7b",
+            "label": "API Domain",
+            "name": "wcr_api_domain",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wp-typography": "none",
+            "choices": {
+                "live": "Live",
+                "dev": "Development"
+            },
+            "default_value": "dev",
+            "return_format": "value",
+            "translations": "sync",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "horizontal",
+            "save_other_choice": 0,
+            "pll_default_value": "dev"
+        },
         {
             "key": "field_6932db77d08da",
             "label": "Debug User Data",
@@ -45,5 +132,5 @@
     "description": "",
     "show_in_rest": 0,
     "pll_display_field_instructions": 1,
-    "modified": 1764940877
+    "modified": 1768297986
 }
